@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>QR Code Generator</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        input[type="text"] { padding: 10px; width: 300px; }
+        button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; }
+        img { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>QR Code Generator</h1>
+    <form th:action="@{/generate-qr}" method="post">
+        <input type="text" name="link" placeholder="Enter a link (e.g., https://google.com)" 
+               th:value="${link}" required>
+        <button type="submit">Generate QR Code</button>
+    </form>
+
+    <!-- Show QR code if it exists -->
+    <div th:if="${qrCodeImage}">
+        <h3>QR Code for: <span th:text="${link}"></span></h3>
+        <img th:src="${qrCodeImage}" alt="QR Code">
+    </div>
+</body>
+</html>
